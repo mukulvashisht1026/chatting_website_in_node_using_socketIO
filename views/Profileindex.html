@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Profile Page</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+#imageUpload
+{
+    display: none;
+}
+
+#profileImage
+{
+    cursor: pointer;
+}
+
+#profile-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+	float:left;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+
+#profile-container img {
+    width: 150px;
+    height: 150px;
+}
+</style>
+</head>
+<body class="is-preload">
+
+	<div id="wrapper">
+		<section id="main">
+			<header>
+				<span class="avatar"><br><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+				<div id="profile-container">
+					<image id="profileImage" src="http://lorempixel.com/100/100" />
+				</div>
+				<input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture></span>
+				<h1>{{name}}</h1>
+				<p>{{category}}</p>
+				<p>{{email}}</p>
+			</header>
+			
+			<h2>About the Player</h2>
+			<footer>
+				<ul class="icons">
+					<li><a href="#" class="fa-twitter">Twitter</a></li>
+					<li><a href="#" class="fa-instagram">Instagram</a></li>
+					<li><a href="#" class="fa-facebook">Facebook</a></li>
+				</ul>
+			</footer>
+			<form method="post" action="#">
+				<ul class="actions special">
+					<li><a href="/joinchat" class="button">chat</a></li>
+				</ul>
+			</form>
+			<form method="post" action="#">
+				<ul class="actions special">
+					<li><a href="/logout" class="button">Logout</a></li>
+				</ul>
+			</form>
+			
+			<hr />
+		</section>
+	</div>
+	
+<script>
+$("#profileImage").click(function(e) {
+    $("#imageUpload").click();
+});
+
+function fasterPreview( uploader ) {
+    if ( uploader.files && uploader.files[0] ){
+          $('#profileImage').attr('src', 
+             window.URL.createObjectURL(uploader.files[0]) );
+    }
+}
+
+$("#imageUpload").change(function(){
+    fasterPreview( this );
+});
+
+if ('addEventListener' in window) {
+	window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+	document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+	}
+</script>
+
+</body>
+</html>
