@@ -1,0 +1,11 @@
+# Full setup with a real MongoDB: `make compose-up`. Default `make docker-run` uses the in-memory mock instead.
+services:
+  app:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      USE_MOCKS: "0"
+      MONGO_URL: mongodb://mongo:27017/User
+    depends_on: [mongo]
+  mongo:
+    image: mongo:4.4

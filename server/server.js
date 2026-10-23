@@ -16,7 +16,10 @@ const publicPath = path.join(__dirname, '../public');
 const dbpath = path.join(__dirname,'../databaseoperations/');
 console.log(dbpath);
   // console.log(__dirname);
-var User = require('../databaseoperations/mongoop.js');
+// MOCK: USE_MOCKS=1 (default) keeps users in memory so MongoDB is optional.
+var User = process.env.USE_MOCKS === '0'
+  ? require('../databaseoperations/mongoop.js')
+  : require('../databaseoperations/mockUser.js');
 var rooms = [];
 const router = express.Router();
 const port = process.env.PORT || 3000;
@@ -39,7 +42,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(session({
-  secret: 'work hard',
+  secret: process.env.SESSION_SECRET || 'work hard', // TODO: require SESSION_SECRET in production
   resave: true,
   saveUninitialized: false
 }));

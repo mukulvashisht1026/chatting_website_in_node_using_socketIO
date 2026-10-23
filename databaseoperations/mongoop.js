@@ -18,7 +18,7 @@ var mongoose = require('mongoose');
 var Promise = require("bluebird");
 // var bcrypt = require('bcrypt');
 
-var url = "mongodb://localhost:27017/User";
+var url = process.env.MONGO_URL || "mongodb://localhost:27017/User";
 var uniqueValidator = require('mongoose-unique-validator');
 
 mongoose.connect(url,{
